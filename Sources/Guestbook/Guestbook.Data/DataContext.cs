@@ -13,9 +13,9 @@
         public DataContext() : base("name=Guestbook")
         {
         }
-
-        public DbSet<Message> Messages { get; set; }
         
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Configuration.LazyLoadingEnabled = false;

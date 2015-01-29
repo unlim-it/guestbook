@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="Migrations\201501292339360_AddMessagesTable.cs" />
+    <Compile Include="Migrations\201501292339360_AddMessagesTable.Designer.cs">
+      <DependentUpon>201501292339360_AddMessagesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +63,11 @@
       <Project>{0a51bf07-a6bb-46fa-a8ae-81966697a094}</Project>
       <Name>Guestbook.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201501292339360_AddMessagesTable.resx">
+      <DependentUpon>201501292339360_AddMessagesTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
