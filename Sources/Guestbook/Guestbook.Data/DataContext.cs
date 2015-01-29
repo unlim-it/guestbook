@@ -2,6 +2,8 @@
 {
     using System.Data.Entity;
 
+    using Guestbook.Models;
+
     internal class DataContext : DbContext
     {
         /// <summary>
@@ -11,6 +13,8 @@
         public DataContext() : base("name=Guestbook")
         {
         }
+
+        public DbSet<Message> Messages { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
