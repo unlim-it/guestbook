@@ -1,5 +1,6 @@
 ﻿namespace Guestbook.Silverlight
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -17,8 +18,12 @@
             this.guestbookService = new GuestbookService();
             this.Messages = new AsyncPagedCollectionView<Message> { FetchData = this.FetchMessages };
             this.Messages.MoveToFirstPage();
+
+            this.PageCountVariants = new List<int> { 10, 15, 20, 25, 50, 100 };
         }
-        
+
+        public List<int> PageCountVariants { get; set; }
+
         public AsyncPagedCollectionView<Message> Messages { get; set; }
 
         private async Task<PagedDataResponse<Message>> FetchMessages(int pageIndex)

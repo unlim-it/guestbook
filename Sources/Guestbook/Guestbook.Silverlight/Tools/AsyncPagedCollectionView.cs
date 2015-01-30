@@ -84,6 +84,7 @@
             set
             {
                 this.SetField(ref this.pageSize, value, "PageSize");
+                this.RefreshData(this.pageIndex);
             }
             get
             {

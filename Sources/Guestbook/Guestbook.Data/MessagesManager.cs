@@ -12,8 +12,8 @@
         {
             using (var context = new DataContext())
             {
-                var skipCount = filter.PageIndex * filter.PageSize;
-                var takeCount = skipCount + filter.PageSize;
+                var skipCount = filter.PageIndex * filter.PageSize + 1;
+                var takeCount = skipCount + filter.PageSize - 1;
 
                 var selectedMessages = await context.Database
                     .SqlQuery<Message>("EXEC spSearchMessages @skipCount, @takeCount",
