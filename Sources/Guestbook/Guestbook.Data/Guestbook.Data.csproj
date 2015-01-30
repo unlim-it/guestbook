@@ -56,6 +56,10 @@
     <Compile Include="Migrations\201501300834035_AddColumnCreatedAtToMessagesTable.Designer.cs">
       <DependentUpon>201501300834035_AddColumnCreatedAtToMessagesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501300906226_CreateSearchMessagesStoredProcedure.cs" />
+    <Compile Include="Migrations\201501300906226_CreateSearchMessagesStoredProcedure.Designer.cs">
+      <DependentUpon>201501300906226_CreateSearchMessagesStoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501300834035_AddColumnCreatedAtToMessagesTable.resx">
       <DependentUpon>201501300834035_AddColumnCreatedAtToMessagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501300906226_CreateSearchMessagesStoredProcedure.resx">
+      <DependentUpon>201501300906226_CreateSearchMessagesStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

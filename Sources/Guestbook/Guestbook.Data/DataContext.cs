@@ -4,7 +4,7 @@
 
     using Guestbook.Models;
 
-    internal class DataContext : DbContext
+    public class DataContext : DbContext
     {
         /// <summary>
         /// Default <see cref="DataContext"/> constructor uses 'Guestbook' connection string
