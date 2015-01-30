@@ -1,39 +1,28 @@
 ﻿namespace Guestbook.Silverlight
 {
+    using System;
     using System.Threading.Tasks;
-    using System.Windows.Data;
 
+    using Guestbook.Models;
     using Guestbook.Silverlight.Mvvm;
     using Guestbook.Silverlight.Network;
+    using Guestbook.Silverlight.Tools;
 
     public class MainPageViewModel : ViewModel
     {
         private readonly GuestbookService guestbookService;
-
-        private PagedCollectionView messages;
-
+        
         public MainPageViewModel()
         {
             this.guestbookService = new GuestbookService();
+            this.Messages = new AsyncPagedCollectionView<Message> { FetchData = this.FetchMessages };
         }
+        
+        public AsyncPagedCollectionView<Message> Messages { get; set; }
 
-        public PagedCollectionView Messages
+        private async Task<PagedDataResponse<Message>> FetchMessages(int pageIndex)
         {
-            get
-            {
-                return this.messages;
-            }
-            set
-            {
-                this.messages = value;
-                this.RaisePropertyChanged("Messages");
-            }
-        }
-
-        public async Task Initialize()
-        {
-            var newMessages = await guestbookService.GetMessages();
-            this.Messages = new PagedCollectionView(newMessages);
+            throw new NotFiniteNumberException();
         }
     }
 }

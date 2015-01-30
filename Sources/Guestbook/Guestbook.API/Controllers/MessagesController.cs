@@ -11,17 +11,17 @@
         {
             var messages = new List<Message>
             {
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
-                new Message { Email = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
+                new Message { Text = "test12345@gmail.com" },
             };
 
             return messages;
