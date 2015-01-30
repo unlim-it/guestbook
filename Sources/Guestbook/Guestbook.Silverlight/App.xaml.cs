@@ -15,9 +15,12 @@
             InitializeComponent();
         }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private async void Application_Startup(object sender, StartupEventArgs e)
         {
-            this.RootVisual = new MainPage();
+            var viewModel = new MainPageViewModel();
+            this.RootVisual = new MainPage { DataContext = viewModel };
+
+            await viewModel.Initialize();
         }
 
         private void Application_Exit(object sender, EventArgs e)
