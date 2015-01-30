@@ -9,10 +9,7 @@ namespace Guestbook.API
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
-            config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute("def", "api/{Controller}");
-            config.Formatters.Remove(config.Formatters.XmlFormatter);
-
+            config.Routes.MapHttpRoute("Default", "api/{controller}/{id}", new { id = RouteParameter.Optional });
             app.UseWebApi(config);
         }
     }
