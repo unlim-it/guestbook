@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="MessagesManager.cs" />
     <Compile Include="Migrations\201501292339360_AddMessagesTable.cs" />
     <Compile Include="Migrations\201501292339360_AddMessagesTable.Designer.cs">
       <DependentUpon>201501292339360_AddMessagesTable.cs</DependentUpon>
@@ -56,6 +57,7 @@
       <DependentUpon>201501300834035_AddColumnCreatedAtToMessagesTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
