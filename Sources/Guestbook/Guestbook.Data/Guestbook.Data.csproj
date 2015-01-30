@@ -51,6 +51,10 @@
     <Compile Include="Migrations\201501292339360_AddMessagesTable.Designer.cs">
       <DependentUpon>201501292339360_AddMessagesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501300834035_AddColumnCreatedAtToMessagesTable.cs" />
+    <Compile Include="Migrations\201501300834035_AddColumnCreatedAtToMessagesTable.Designer.cs">
+      <DependentUpon>201501300834035_AddColumnCreatedAtToMessagesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +71,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201501292339360_AddMessagesTable.resx">
       <DependentUpon>201501292339360_AddMessagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501300834035_AddColumnCreatedAtToMessagesTable.resx">
+      <DependentUpon>201501300834035_AddColumnCreatedAtToMessagesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
