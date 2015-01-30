@@ -1,6 +1,6 @@
 ﻿namespace Guestbook.Silverlight
 {
-    using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Guestbook.Models;
@@ -16,13 +16,17 @@
         {
             this.guestbookService = new GuestbookService();
             this.Messages = new AsyncPagedCollectionView<Message> { FetchData = this.FetchMessages };
+            this.Messages.MoveToFirstPage();
         }
         
         public AsyncPagedCollectionView<Message> Messages { get; set; }
 
         private async Task<PagedDataResponse<Message>> FetchMessages(int pageIndex)
         {
-            throw new NotFiniteNumberException();
+            var messages = await guestbookService.GetMessages();
+            var messagesList = messages.ToList();
+
+            return new PagedDataResponse<Message> { TotalItemCount = messagesList.Count(), Items = messagesList };
         }
     }
 }

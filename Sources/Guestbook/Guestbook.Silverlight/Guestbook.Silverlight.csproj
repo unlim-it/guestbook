@@ -110,6 +110,7 @@
     <Compile Include="Network\GuestbookService.cs" />
     <Compile Include="Network\WebInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\UniformGrid.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

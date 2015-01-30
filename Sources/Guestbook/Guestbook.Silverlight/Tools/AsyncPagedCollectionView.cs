@@ -21,7 +21,6 @@
         public AsyncPagedCollectionView()
         {
             this.PageSize = 10;
-            this.RefreshData(0);
         }
         
         public bool CanChangePage
