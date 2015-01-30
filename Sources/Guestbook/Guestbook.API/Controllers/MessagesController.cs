@@ -1,30 +1,20 @@
 ﻿namespace Guestbook.API.Controllers
 {
-    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Web.Http;
 
+    using Guestbook.Data;
     using Guestbook.Models;
 
     public class MessagesController : ApiController
     {
-        public IEnumerable<Message> Get()
+        [HttpPost]
+        [Route("api/search/messages")]
+        public async Task<MessageSearchResult> Search(MessageFilter filter)
         {
-            var messages = new List<Message>
-            {
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-                new Message { Text = "test12345@gmail.com" },
-            };
-
-            return messages;
+            var messageManager = new MessagesManager();
+            var result = await messageManager.SearchMessages(filter);
+            return result;
         }
     }
 }

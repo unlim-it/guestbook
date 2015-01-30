@@ -1,8 +1,7 @@
 ﻿namespace Guestbook.Data
 {
-    using System;
-    using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Guestbook.Models;
@@ -13,10 +12,18 @@
         {
             using (var context = new DataContext())
             {
-                //return await context.Database.SqlQuery<IEnumerable<Message>>("EXEC spMessages_get_ProjectsByManager @employeeCode", 
-                //    new SqlParameter("employeeCode", employeeCode)).ToListAsync();
+                var skipCount = filter.PageIndex * filter.PageSize;
+                var takeCount = skipCount + filter.PageSize;
 
-                throw new NotImplementedException();
+                var selectedMessages = await context.Database
+                    .SqlQuery<Message>("EXEC spSearchMessages @skipCount, @takeCount",
+                    new SqlParameter("skipCount", skipCount),
+                    new SqlParameter("takeCount", takeCount))
+                    .ToListAsync();
+
+                var count = context.Messages.Count();
+
+                return new MessageSearchResult { Items = selectedMessages, TotalCount =  count };
             }
         }
     }

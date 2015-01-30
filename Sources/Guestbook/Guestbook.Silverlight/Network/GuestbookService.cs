@@ -1,6 +1,5 @@
 ﻿namespace Guestbook.Silverlight.Network
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Guestbook.Models;
@@ -14,9 +13,9 @@
             serviceUrl = "http://localhost:3090/api";
         }
 
-        public async Task<IEnumerable<Message>> GetMessages()
+        public async Task<MessageSearchResult> SearchMessages(MessageFilter filter)
         {
-            var messages = await WebInvoker.Invoke<IEnumerable<Message>>(string.Format("{0}/messages", this.serviceUrl), "GET", null, null);
+            var messages = await WebInvoker.Invoke<MessageSearchResult>(string.Format("{0}/search/messages", this.serviceUrl), "POST", filter, null);
             return messages;
         }
     }

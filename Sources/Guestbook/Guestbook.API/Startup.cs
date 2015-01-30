@@ -14,7 +14,11 @@ namespace Guestbook.API
             Database.Initialize();
 
             var config = new HttpConfiguration();
+
+            config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("Default", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+            
+
             app.UseWebApi(config);
         }
     }

@@ -23,10 +23,13 @@
 
         private async Task<PagedDataResponse<Message>> FetchMessages(int pageIndex)
         {
-            var messages = await guestbookService.GetMessages();
-            var messagesList = messages.ToList();
+            var messagesResult = await guestbookService.SearchMessages(new MessageFilter
+            {
+                PageIndex = pageIndex, 
+                PageSize = this.Messages.PageSize
+            });
 
-            return new PagedDataResponse<Message> { TotalItemCount = messagesList.Count(), Items = messagesList };
+            return new PagedDataResponse<Message> { TotalItemCount = messagesResult.TotalCount, Items = messagesResult.Items.ToList() };
         }
     }
 }
