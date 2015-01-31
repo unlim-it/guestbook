@@ -27,13 +27,22 @@
 
         private string captchUrl;
 
+        private string activeOrderBy;
+
         public MainPageViewModel()
         {
             this.guestbookService = new GuestbookService();
             this.Messages = new AsyncPagedCollectionView<Message> { FetchData = this.FetchMessages };
-            this.Messages.MoveToFirstPage();
-
+            
             this.PageCountVariants = new List<int> { 10, 15, 20, 25, 50, 100 };
+            this.OrderByVariants = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("UserName", "User Name"),
+                new KeyValuePair<string, string>("Email", "E-mail Address"),
+                new KeyValuePair<string, string>("CreatedAt", "Submit Date"),
+            };
+
+            this.ActiveOrderBy = OrderByVariants[2].Key;
 
             this.AddCommentCommand = new RelayCommand(AddComment);
             this.CancelCommand = new RelayCommand(Cancel);
@@ -109,8 +118,23 @@
                 this.RaisePropertyChanged("Text");
             }
         }
-        
+
+        public string ActiveOrderBy
+        {
+            get
+            {
+                return this.activeOrderBy;
+            }
+            set
+            {
+                this.activeOrderBy = value;
+                this.RaisePropertyChanged("ActiveOrderBy");
+                this.Messages.MoveToPage(this.Messages.PageIndex);
+            }
+        }
+
         public List<int> PageCountVariants { get; set; }
+        public List<KeyValuePair<string, string>> OrderByVariants { get; set; }
 
         public AsyncPagedCollectionView<Message> Messages { get; set; }
 
@@ -145,7 +169,8 @@
             var messagesResult = await guestbookService.SearchMessages(new MessageFilter
             {
                 PageIndex = pageIndex, 
-                PageSize = this.Messages.PageSize
+                PageSize = this.Messages.PageSize,
+                OrderBy = this.ActiveOrderBy
             });
 
             return new PagedDataResponse<Message> { TotalItemCount = messagesResult.TotalCount, Items = messagesResult.Items.ToList() };

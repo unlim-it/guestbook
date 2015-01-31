@@ -139,6 +139,19 @@
                             Command="{Binding AddCommentCommand}"
                             Content="Add Comment"
                             Style="{StaticResource FormButtonStyle}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0 0 5 0"
+                                VerticalAlignment="Center"
+                                Text="Order By:" />
+                            <ComboBox
+                                VerticalAlignment="Center"
+                                DisplayMemberPath="Value"
+                                ItemsSource="{Binding OrderByVariants}"
+                                SelectedValue="{Binding ActiveOrderBy, Mode=TwoWay}"
+                                SelectedValuePath="Key">
+                            </ComboBox>
+                        </StackPanel>
                     </Grid>
                     <ScrollViewer
                         Grid.Row="1"

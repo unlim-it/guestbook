@@ -16,7 +16,9 @@
                 var takeCount = skipCount + filter.PageSize - 1;
 
                 var selectedMessages = await context.Database
-                    .SqlQuery<Message>("EXEC spSearchMessages @skipCount, @takeCount",
+                    .SqlQuery<Message>("EXEC spSearchMessages @skipCount, @takeCount, @orderBy, @orderDirection",
+                    new SqlParameter("orderBy", filter.OrderBy),
+                    new SqlParameter("orderDirection", true),
                     new SqlParameter("skipCount", skipCount),
                     new SqlParameter("takeCount", takeCount))
                     .ToListAsync();

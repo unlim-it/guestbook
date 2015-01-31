@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201501310022244_AddInsertMessageStoredProcedure.Designer.cs">
       <DependentUpon>201501310022244_AddInsertMessageStoredProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501311452576_AlterSearchStoredProcedure.cs" />
+    <Compile Include="Migrations\201501311452576_AlterSearchStoredProcedure.Designer.cs">
+      <DependentUpon>201501311452576_AlterSearchStoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501310022244_AddInsertMessageStoredProcedure.resx">
       <DependentUpon>201501310022244_AddInsertMessageStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501311452576_AlterSearchStoredProcedure.resx">
+      <DependentUpon>201501311452576_AlterSearchStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
