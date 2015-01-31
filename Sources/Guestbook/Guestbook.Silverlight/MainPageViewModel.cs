@@ -240,7 +240,7 @@
             }
             finally
             {
-                this.IsBusy = true;
+                this.IsBusy = false;
             }
         }
 

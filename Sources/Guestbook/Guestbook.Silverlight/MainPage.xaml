@@ -203,6 +203,8 @@
                                                     <Run FontWeight="Bold" Text="{Binding UserName}" />
                                                     <Run Text="|" />
                                                     <Run Text="{Binding Email}" />
+                                                    <Run Text="|" />
+                                                    <Run Text="{Binding CreatedAt, StringFormat=f}" />
                                                     <LineBreak />
                                                     <Run Text="{Binding Text}" />
                                                 </TextBlock.Inlines>
