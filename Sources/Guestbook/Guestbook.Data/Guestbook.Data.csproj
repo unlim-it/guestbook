@@ -60,6 +60,14 @@
     <Compile Include="Migrations\201501300906226_CreateSearchMessagesStoredProcedure.Designer.cs">
       <DependentUpon>201501300906226_CreateSearchMessagesStoredProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501310021314_AddColumnsIPAddressAndWebBrowserToMessagesTable.cs" />
+    <Compile Include="Migrations\201501310021314_AddColumnsIPAddressAndWebBrowserToMessagesTable.Designer.cs">
+      <DependentUpon>201501310021314_AddColumnsIPAddressAndWebBrowserToMessagesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501310022244_AddInsertMessageStoredProcedure.cs" />
+    <Compile Include="Migrations\201501310022244_AddInsertMessageStoredProcedure.Designer.cs">
+      <DependentUpon>201501310022244_AddInsertMessageStoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +91,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501300906226_CreateSearchMessagesStoredProcedure.resx">
       <DependentUpon>201501300906226_CreateSearchMessagesStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501310021314_AddColumnsIPAddressAndWebBrowserToMessagesTable.resx">
+      <DependentUpon>201501310021314_AddColumnsIPAddressAndWebBrowserToMessagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501310022244_AddInsertMessageStoredProcedure.resx">
+      <DependentUpon>201501310022244_AddInsertMessageStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

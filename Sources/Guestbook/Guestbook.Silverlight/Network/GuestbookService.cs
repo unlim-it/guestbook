@@ -1,5 +1,6 @@
 ﻿namespace Guestbook.Silverlight.Network
 {
+    using System;
     using System.Threading.Tasks;
 
     using Guestbook.Models;
@@ -15,8 +16,15 @@
 
         public async Task<MessageSearchResult> SearchMessages(MessageFilter filter)
         {
-            var messages = await WebInvoker.Invoke<MessageSearchResult>(string.Format("{0}/search/messages", this.serviceUrl), "POST", filter, null);
+            var messages = await WebInvoker.Invoke<MessageSearchResult>(string.Format("{0}/search/messages", 
+                this.serviceUrl), "POST", filter, null);
+
             return messages;
+        }
+
+        public async Task CreateMessage(Message message)
+        {
+            await WebInvoker.Invoke<Object>(string.Format("{0}/messages", this.serviceUrl), "POST", message, null);
         }
     }
 }

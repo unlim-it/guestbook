@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:silverlight="clr-namespace:Guestbook.Silverlight"
+    d:DataContext="{d:DesignInstance silverlight:MainPageViewModel}"
     d:DesignHeight="600"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -23,96 +25,179 @@
             <Image
                 Grid.Row="0"
                 Grid.Column="1"
-                Width="86"
-                Margin="10 0"
-                Source="Content/Images/guestbook.png" />
+                Style="{StaticResource LogoImageStyle}" />
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="0"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                FontFamily="Microsoft JhengHei Light"
-                FontSize="48"
-                Foreground="#0D2038"
+                Style="{StaticResource LogoTextBlockStyle}"
                 Text="GUEST" />
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="2"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontFamily="Microsoft JhengHei Light"
-                FontSize="48"
-                Foreground="#0D2038"
+                Style="{StaticResource LogoTextBlockStyle}"
                 Text="BOOK" />
             <Border
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                Margin="0 10"
-                BorderBrush="#0D2038"
-                BorderThickness="0 3 0 2"
-                Padding="0 10">
-                <ScrollViewer BorderThickness="0" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding Messages}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border
-                                    Height="60"
-                                    Margin="0 2.5"
-                                    Background="#F2F2F5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <Border
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            Background="#E7E7E7"
-                                            Padding="10">
-                                            <Image
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Source="Content/Images/message.png" />
-                                        </Border>
-                                        <TextBlock
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            Grid.Column="1"
-                                            Margin="10 7"
-                                            TextTrimming="WordEllipsis"
-                                            TextWrapping="Wrap">
-                                            <TextBlock.Inlines>
-                                                <Run FontWeight="Bold" Text="{Binding UserName}" />
-                                                <Run Text="|" />
-                                                <Run Text="{Binding Email}" />
-                                                <LineBreak />
-                                                <Run Text="{Binding Text}" />
-                                            </TextBlock.Inlines>
-                                        </TextBlock>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+                Style="{StaticResource ContainerBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Popup
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        IsOpen="{Binding IsAdding}">
+                        <Border
+                            Width="800"
+                            Height="330"
+                            Background="{StaticResource BrandBrush4}"
+                            BorderBrush="{StaticResource BrandBrush1}"
+                            BorderThickness="2 0 2 2"
+                            Padding="20">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="0.5*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Grid.Column="0">
+                                    <TextBlock
+                                        Margin="5 0 0 2"
+                                        Style="{StaticResource FormTextBlockStyle}"
+                                        Text="User Name" />
+                                    <TextBox Text="{Binding UserName, Mode=TwoWay}" />
+                                    <TextBlock
+                                        Margin="5 5 0 2"
+                                        Style="{StaticResource FormTextBlockStyle}"
+                                        Text="E-mail" />
+                                    <TextBox Text="{Binding Email, Mode=TwoWay}" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="2">
+                                    <TextBlock
+                                        Margin="5 0 0 2"
+                                        Style="{StaticResource FormTextBlockStyle}"
+                                        Text="Homepage" />
+                                    <TextBox Text="{Binding Homepage, Mode=TwoWay}" />
+                                    <TextBlock
+                                        Margin="5 5 0 2"
+                                        Style="{StaticResource FormTextBlockStyle}"
+                                        Text="CAPTCHA" />
+                                    <TextBox Text="{Binding Captcha, Mode=TwoWay}" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <TextBlock
+                                        Margin="5 5 0 2"
+                                        Style="{StaticResource FormTextBlockStyle}"
+                                        Text="Text" />
+                                    <TextBox
+                                        Height="100"
+                                        AcceptsReturn="True"
+                                        Text="{Binding Text, Mode=TwoWay}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        Command="{Binding PostCommand}"
+                                        Content="Post"
+                                        Style="{StaticResource FormButtonStyle}" />
+                                    <Button
+                                        Margin="10 0 0 0"
+                                        Command="{Binding CancelCommand}"
+                                        Content="Cancel"
+                                        Style="{StaticResource FormButtonStyle}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Popup>
+                    <Grid Grid.Row="0" Margin="0 7 0 0">
+                        <Button
+                            HorizontalAlignment="Left"
+                            Command="{Binding AddCommentCommand}"
+                            Content="Add Comment"
+                            Style="{StaticResource FormButtonStyle}" />
+                    </Grid>
+                    <ScrollViewer
+                        Grid.Row="1"
+                        Margin="0 5"
+                        BorderThickness="0"
+                        Padding="0 0 4 0"
+                        VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Messages}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Height="65"
+                                        Margin="0 2.5"
+                                        Background="{StaticResource BrandBrush2}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Border
+                                                Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                Background="{StaticResource BrandBrush3}"
+                                                Padding="12">
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="Content/Images/message.png" />
+                                            </Border>
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="1"
+                                                Margin="10 7"
+                                                TextTrimming="WordEllipsis"
+                                                TextWrapping="Wrap">
+                                                <TextBlock.Inlines>
+                                                    <Run FontWeight="Bold" Text="{Binding UserName}" />
+                                                    <Run Text="|" />
+                                                    <Run Text="{Binding Email}" />
+                                                    <LineBreak />
+                                                    <Run Text="{Binding Text}" />
+                                                </TextBlock.Inlines>
+                                            </TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
             </Border>
             <sdk:DataPager
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                HorizontalAlignment="Center"
-                DisplayMode="FirstLastNumeric"
-                Source="{Binding Messages}" />
+                Source="{Binding Messages}"
+                Style="{StaticResource DataPagerStyle}" />
             <StackPanel
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
                 HorizontalAlignment="Right"
+                VerticalAlignment="Center"
                 Orientation="Horizontal">
                 <TextBlock
                     Margin="5 0"

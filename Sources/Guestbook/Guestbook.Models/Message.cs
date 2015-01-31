@@ -10,5 +10,7 @@
         public string Homepage { get; set; }
         public string Text { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string IPAddress { get; set; }
+        public string WebBrowser { get; set; }
     }
 }

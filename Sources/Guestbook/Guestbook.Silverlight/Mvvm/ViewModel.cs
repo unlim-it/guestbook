@@ -17,6 +17,19 @@
             this.errors = new Dictionary<string, List<string>>();
         }
 
+        public bool IsBusy
+        {
+            get
+            {
+                return this.isBusy;
+            }
+            set
+            {
+                this.isBusy = value;
+                this.RaisePropertyChanged("IsBusy");
+            }
+        }
+
         #region Implementation of INotifyPropertyChanged
         
         public event PropertyChangedEventHandler PropertyChanged;
@@ -79,6 +92,8 @@
         }
 
         private readonly object @lock = new object();
+
+        private bool isBusy;
 
         public void Validate()
         {

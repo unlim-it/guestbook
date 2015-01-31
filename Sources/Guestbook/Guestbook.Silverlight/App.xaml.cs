@@ -11,7 +11,7 @@
             this.Startup += this.Application_Startup;
             this.Exit += this.Application_Exit;
             this.UnhandledException += this.Application_UnhandledException;
-
+            
             InitializeComponent();
         }
 
@@ -45,12 +45,11 @@
 
         private void ReportErrorToDOM(ApplicationUnhandledExceptionEventArgs e)
         {
+            e.Handled = true;
+            
             try
             {
-                string errorMsg = e.ExceptionObject.Message + e.ExceptionObject.StackTrace;
-                errorMsg = errorMsg.Replace('"', '\'').Replace("\r\n", @"\n");
-
-                System.Windows.Browser.HtmlPage.Window.Eval("throw new Error(\"Unhandled Error in Silverlight Application " + errorMsg + "\");");
+                MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
             }
             catch (Exception)
             {

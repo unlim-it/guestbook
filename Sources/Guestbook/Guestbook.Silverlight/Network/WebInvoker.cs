@@ -14,9 +14,8 @@ namespace Guestbook.Silverlight.Network
             params KeyValuePair<string, string>[] headers) where TResult : class 
         {
             var request = WebRequest.Create(url);
-
+            
             request.Method = method;
-
             if (headers != null)
             {
                 foreach (var pair in headers)

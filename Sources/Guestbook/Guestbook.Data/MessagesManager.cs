@@ -26,5 +26,20 @@
                 return new MessageSearchResult { Items = selectedMessages, TotalCount =  count };
             }
         }
+
+        public async Task InsertMessage(Message message)
+        {
+            using (var context = new DataContext())
+            {
+                await context.Database.ExecuteSqlCommandAsync("spInsertMessage @userName, @email, @homePage, @text, @createdAt, @ipAddress, @webBrowser",
+                    new SqlParameter("@userName", message.UserName),
+                    new SqlParameter("@email", message.Email),
+                    new SqlParameter("@homePage", message.Homepage),
+                    new SqlParameter("@text", message.Text),
+                    new SqlParameter("@createdAt", message.CreatedAt),
+                    new SqlParameter("@ipAddress", message.IPAddress),
+                    new SqlParameter("@webBrowser", message.WebBrowser));
+            }
+        }
     }
 }
