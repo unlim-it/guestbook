@@ -123,11 +123,13 @@
                                     <Button
                                         Command="{Binding PostCommand}"
                                         Content="Post"
+                                        IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}"
                                         Style="{StaticResource FormButtonStyle}" />
                                     <Button
                                         Margin="10 0 0 0"
                                         Command="{Binding CancelCommand}"
                                         Content="Cancel"
+                                        IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}"
                                         Style="{StaticResource FormButtonStyle}" />
                                 </StackPanel>
                             </Grid>
@@ -138,6 +140,7 @@
                             HorizontalAlignment="Left"
                             Command="{Binding AddCommentCommand}"
                             Content="Add Comment"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}"
                             Style="{StaticResource FormButtonStyle}" />
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                             <TextBlock VerticalAlignment="Center" Text="Order By:" />
@@ -145,6 +148,7 @@
                                 Margin="5 0"
                                 VerticalAlignment="Center"
                                 DisplayMemberPath="Value"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}"
                                 ItemsSource="{Binding OrderByVariants}"
                                 SelectedValue="{Binding OrderBy, Mode=TwoWay}"
                                 SelectedValuePath="Key">
@@ -152,7 +156,8 @@
                             <CheckBox
                                 VerticalAlignment="Center"
                                 Content="Ascending"
-                                IsChecked="{Binding OrderByDirection, Mode=TwoWay}" />
+                                IsChecked="{Binding OrderByDirection, Mode=TwoWay}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}" />
                         </StackPanel>
                     </Grid>
                     <ScrollViewer
@@ -214,6 +219,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}"
                 Source="{Binding Messages}"
                 Style="{StaticResource DataPagerStyle}" />
             <StackPanel
@@ -229,6 +235,7 @@
                     Text="Page Count:" />
                 <ComboBox
                     x:Name="PageCountVariantsBox"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBool}}"
                     ItemsSource="{Binding PageCountVariants}"
                     SelectedItem="{Binding Messages.PageSize, Mode=TwoWay}">
                 </ComboBox>

@@ -106,6 +106,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPageViewModel.cs" />
+    <Compile Include="Mvvm\InvertedBoolConverter.cs" />
     <Compile Include="Mvvm\RelayComand.cs" />
     <Compile Include="Tools\PagedDataResponse.cs" />
     <Compile Include="Tools\AsyncPagedCollectionView.cs" />

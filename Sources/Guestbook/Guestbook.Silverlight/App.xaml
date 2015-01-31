@@ -1,10 +1,14 @@
 ﻿<Application
     x:Class="Guestbook.Silverlight.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mvvm="clr-namespace:Guestbook.Silverlight.Mvvm">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <mvvm:InvertedBoolConverter x:Key="InvertedBool" />
+                </ResourceDictionary>
                 <ResourceDictionary Source="Content/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

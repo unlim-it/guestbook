@@ -183,15 +183,24 @@
 
         private async Task<PagedDataResponse<Message>> FetchMessages(int pageIndex)
         {
-            var messagesResult = await guestbookService.SearchMessages(new MessageFilter
+            try
             {
-                PageIndex = pageIndex, 
-                PageSize = this.Messages.PageSize,
-                OrderBy = this.OrderBy,
-                OrderByDirection = this.OrderByDirection
-            });
+                this.IsBusy = true;
 
-            return new PagedDataResponse<Message> { TotalItemCount = messagesResult.TotalCount, Items = messagesResult.Items.ToList() };
+                var messagesResult = await guestbookService.SearchMessages(new MessageFilter
+                {
+                    PageIndex = pageIndex,
+                    PageSize = this.Messages.PageSize,
+                    OrderBy = this.OrderBy,
+                    OrderByDirection = this.OrderByDirection
+                });
+
+                return new PagedDataResponse<Message> { TotalItemCount = messagesResult.TotalCount, Items = messagesResult.Items.ToList() };
+            }
+            finally
+            {
+                this.IsBusy = false;
+            }
         }
 
         private async void Post()
