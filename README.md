@@ -5,7 +5,9 @@
  * Visual Studio 2013
  * MS SQL Server 2008 +
 
-Change Web.config connection string
+### Folow this steps to run application
+
+* Change Web.config connection string
 
 ``` 
 ...
@@ -14,3 +16,6 @@ Change Web.config connection string
 </connectionStrings>
 ...
 ```
+
+* Set 'Guestbook.API' as StartUp project 
+* Rebuild each project separately
