@@ -18,7 +18,7 @@
                 var selectedMessages = await context.Database
                     .SqlQuery<Message>("EXEC spSearchMessages @skipCount, @takeCount, @orderBy, @orderDirection",
                     new SqlParameter("orderBy", filter.OrderBy),
-                    new SqlParameter("orderDirection", true),
+                    new SqlParameter("orderDirection", !filter.OrderByDirection),
                     new SqlParameter("skipCount", skipCount),
                     new SqlParameter("takeCount", takeCount))
                     .ToListAsync();

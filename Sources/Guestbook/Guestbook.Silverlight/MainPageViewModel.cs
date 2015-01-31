@@ -27,7 +27,9 @@
 
         private string captchUrl;
 
-        private string activeOrderBy;
+        private string orderBy;
+
+        private bool orderByDirection;
 
         public MainPageViewModel()
         {
@@ -42,7 +44,7 @@
                 new KeyValuePair<string, string>("CreatedAt", "Submit Date"),
             };
 
-            this.ActiveOrderBy = OrderByVariants[2].Key;
+            this.OrderBy = OrderByVariants[2].Key;
 
             this.AddCommentCommand = new RelayCommand(AddComment);
             this.CancelCommand = new RelayCommand(Cancel);
@@ -118,25 +120,40 @@
                 this.RaisePropertyChanged("Text");
             }
         }
+        
+        public List<int> PageCountVariants { get; set; }
 
-        public string ActiveOrderBy
+        public List<KeyValuePair<string, string>> OrderByVariants { get; set; }
+
+        public AsyncPagedCollectionView<Message> Messages { get; set; }
+
+        public string OrderBy
         {
             get
             {
-                return this.activeOrderBy;
+                return this.orderBy;
             }
             set
             {
-                this.activeOrderBy = value;
+                this.orderBy = value;
                 this.RaisePropertyChanged("ActiveOrderBy");
                 this.Messages.MoveToPage(this.Messages.PageIndex);
             }
         }
 
-        public List<int> PageCountVariants { get; set; }
-        public List<KeyValuePair<string, string>> OrderByVariants { get; set; }
-
-        public AsyncPagedCollectionView<Message> Messages { get; set; }
+        public bool OrderByDirection
+        {
+            get
+            {
+                return this.orderByDirection;
+            }
+            set
+            {
+                this.orderByDirection = value;
+                this.RaisePropertyChanged("IsOrderDirectionAsc");
+                this.Messages.MoveToPage(this.Messages.PageIndex);
+            }
+        }
 
         public bool IsAdding
         {
@@ -170,7 +187,8 @@
             {
                 PageIndex = pageIndex, 
                 PageSize = this.Messages.PageSize,
-                OrderBy = this.ActiveOrderBy
+                OrderBy = this.OrderBy,
+                OrderByDirection = this.OrderByDirection
             });
 
             return new PagedDataResponse<Message> { TotalItemCount = messagesResult.TotalCount, Items = messagesResult.Items.ToList() };
