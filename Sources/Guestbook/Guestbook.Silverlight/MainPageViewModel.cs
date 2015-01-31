@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
+    using System.Windows;
     using System.Windows.Input;
 
     using Guestbook.Models;
@@ -170,10 +172,19 @@
                     CreatedAt = DateTime.Now
                 };
 
-                await guestbookService.CreateMessage(message);
+                await guestbookService.CreateMessage(message, Captcha);
                 this.Messages.MoveToPage(this.Messages.PageIndex);
 
                 this.Cancel();
+            }
+            catch (WebException ex)
+            {
+                var code = ((HttpWebResponse)ex.Response).StatusCode;
+                if (code == HttpStatusCode.NotFound)
+                {
+                    MessageBox.Show("The CAPTCHA code is not valid.", "Error", MessageBoxButton.OK);
+                    this.ResetCaptcha(); 
+                }
             }
             finally
             {
@@ -187,7 +198,13 @@
             this.Email = "";
             this.Homepage = "";
             this.Text = "";
+            this.ResetCaptcha();
+        }
+
+        private void ResetCaptcha()
+        {
             this.CaptchaUrl = "http://localhost:3090/api/captcha?" + Guid.NewGuid();
+            this.Captcha = "";
         }
 
         private void Cancel()

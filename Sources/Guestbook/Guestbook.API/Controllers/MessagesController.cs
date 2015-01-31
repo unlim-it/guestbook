@@ -1,35 +1,34 @@
 ﻿namespace Guestbook.API.Controllers
 {
-    using System;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Http;
 
+    using Guestbook.API.Tools;
     using Guestbook.Data;
     using Guestbook.Models;
 
     public class MessagesController : ApiController
     {
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(Message message)
+        public async Task<HttpResponseMessage> Post(PostData<Message> data)
         {
-            try
+            if (!this.Request.ValidateCaptcha(data.CaptchaCode))
             {
-                var messageManager = new MessagesManager();
-
-                message.IPAddress = HttpContext.Current.Request.UserHostAddress;
-                message.WebBrowser = HttpContext.Current.Request.UserAgent;
-
-                await messageManager.InsertMessage(message);
-
-                return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
+                return new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized };
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
+
+            var message = data.Data;
+
+            var messageManager = new MessagesManager();
+            message.IPAddress = HttpContext.Current.Request.UserHostAddress;
+            message.WebBrowser = HttpContext.Current.Request.UserAgent;
+
+            await messageManager.InsertMessage(message);
+
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
 
         [HttpPost]

@@ -22,9 +22,11 @@
             return messages;
         }
 
-        public async Task CreateMessage(Message message)
+        public async Task CreateMessage(Message message, string captchaCode)
         {
-            await WebInvoker.Invoke<Object>(string.Format("{0}/messages", this.serviceUrl), "POST", message, null);
+            var postData = new PostData<Message> { Data = message, CaptchaCode = captchaCode };
+
+            await WebInvoker.Invoke<Object>(string.Format("{0}/messages", this.serviceUrl), "POST", postData, null);
         }
     }
 }

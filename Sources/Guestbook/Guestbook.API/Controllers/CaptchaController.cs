@@ -25,6 +25,7 @@
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
                 response.Content.Headers.ContentLength = memoryStream.Length;
 
+                response.SaveCaptcha(captchaGenerator.Text);
                 return response;
             }
         }
