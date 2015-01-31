@@ -23,6 +23,8 @@
         private string captcha;
         private string text;
 
+        private string captchUrl;
+
         public MainPageViewModel()
         {
             this.guestbookService = new GuestbookService();
@@ -34,6 +36,7 @@
             this.AddCommentCommand = new RelayCommand(AddComment);
             this.CancelCommand = new RelayCommand(Cancel);
             this.PostCommand = new RelayCommand(Post);
+            this.SetDefaultValues();
         }
         
         public ICommand AddCommentCommand { get; set; }
@@ -122,6 +125,19 @@
             }
         }
 
+        public string CaptchaUrl
+        {
+            get
+            {
+                return this.captchUrl;
+            }
+            set
+            {
+                this.captchUrl = value;
+                this.RaisePropertyChanged("CaptchaUrl");
+            }
+        }
+
         private async Task<PagedDataResponse<Message>> FetchMessages(int pageIndex)
         {
             var messagesResult = await guestbookService.SearchMessages(new MessageFilter
@@ -171,12 +187,15 @@
             this.Email = "";
             this.Homepage = "";
             this.Text = "";
+            this.CaptchaUrl = "http://localhost:3090/api/captcha?" + Guid.NewGuid();
         }
 
         private void Cancel()
         {
             this.SetDefaultValues();
             this.IsAdding = false;
+            
+            this.ResetValidation();
         }
 
         private void AddComment()

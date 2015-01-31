@@ -75,24 +75,33 @@
                                         Margin="5 0 0 2"
                                         Style="{StaticResource FormTextBlockStyle}"
                                         Text="User Name" />
-                                    <TextBox Text="{Binding UserName, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                                     <TextBlock
                                         Margin="5 5 0 2"
                                         Style="{StaticResource FormTextBlockStyle}"
                                         Text="E-mail" />
-                                    <TextBox Text="{Binding Email, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                                 </StackPanel>
-                                <StackPanel Grid.Row="0" Grid.Column="2">
+                                <StackPanel
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2">
                                     <TextBlock
                                         Margin="5 0 0 2"
                                         Style="{StaticResource FormTextBlockStyle}"
                                         Text="Homepage" />
-                                    <TextBox Text="{Binding Homepage, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding Homepage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
+                                    <Image
+                                        Width="368"
+                                        Height="114"
+                                        Margin="0 10 0 2"
+                                        HorizontalAlignment="Left"
+                                        Source="{Binding CaptchaUrl}" />
                                     <TextBlock
                                         Margin="5 5 0 2"
                                         Style="{StaticResource FormTextBlockStyle}"
                                         Text="CAPTCHA" />
-                                    <TextBox Text="{Binding Captcha, Mode=TwoWay}" />
+                                    <TextBox Text="{Binding Captcha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" />
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Grid.Column="0">
                                     <TextBlock
@@ -102,7 +111,7 @@
                                     <TextBox
                                         Height="100"
                                         AcceptsReturn="True"
-                                        Text="{Binding Text, Mode=TwoWay}"
+                                        Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                                         TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel
